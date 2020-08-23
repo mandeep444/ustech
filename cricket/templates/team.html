@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+{%if teams %}
+<h2> All Teams : </h2>
+<table>
+    <thead>
+    <td>Sno</td>
+    <td>Team Name</td>
+    <td>Logo</td>
+
+    <td>Match <br> Played</td>
+    <td>Match <br> Winner</td>
+    <td>Match <br> Lost</td>
+    </thead>
+    {% for team in teams %}
+    <tr>
+        <td>{{ forloop.counter }}.</td>
+        <td><a href="{% url 'team' team.slug %}" >{{ team.name }}</a></td>
+        <td><a href="{% url 'team' team.slug %}" ><img src="{{ team.logo.url }}" style="max-height:50px"></a></td>
+
+         <td>{{ team.get_match_played }}</td>
+         <td>{{ team.get_match_wins_count }}</td>
+         <td>{{ team.get_match_loss_count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{%endif%}
+
+
+{%if team %}
+<h2>Players List of Team:  {{ team.name }}</h2>
+<table>
+
+    <thead>
+    <td>Team Name</td>
+    <td>Logo</td>
+    <td>Players</td>
+    </thead>
+    <tr>
+        <td>{{ team.name }}</td>
+        <td><img src="{{ team.logo.url }}" style="max-height:300px"></td>
+        <td>
+              <ul>
+                {% for player in team.players.all %}
+                <li>{{ forloop.counter }} .<a href="{% url 'player' player.slug %}"> {{ player.full_name }}</a></li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+
+</table>
+{%endif%}
+
+</body>
+</html>

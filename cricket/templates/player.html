@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{%if players %}
+
+<h2> All Teams Player List : </h2>
+<table>
+    {% for player in players %}
+    <tr>
+        <td>{{ forloop.counter }}.</td>
+        <td><a href="{% url 'player' player.slug %}" >{{ player.first_name }}</a></td>
+        <td><a href="{% url 'player' player.slug %}" >{{ player.last_name }}</a></td>
+        <td> <a href="{% url 'team'  player.team.slug %}"> {{ player.team.name }} </a>  </td>
+        <td><img src="{{ player.avatar.url }}" style="max-height:300px"> </td>
+    </tr>
+    {% endfor %}
+</table>
+{%endif%}
+
+
+{%if player %}
+<h2>{{player.full_name}}  details: </h2>
+<ul>
+    <li>First Name: {{ player.first_name }}</li>
+    <li>Last Name: {{ player.last_name }}</li>
+    <li>Team: <a href="{% url 'team' player.team.slug %}">{{ player.team.name }}</a> </li>
+    <li>Country Name: {{ player.get_country_display }}</li>
+    <li>Jersey Number: {{ player.jersey_number }}</li>
+    <li>Total Match Played: {{ player.get_match_played }}</li>
+    <li>Total runs: {{ player.get_runs_count }}</li>
+    <li>Highest Score: {{ player.get_highest_score }}</li>
+    <li>Fifties Count: {{ player.get_50s_count }}</li>
+    <li>Hundreds Count: {{ player.get_100s_count }}</li>
+    <li>Logo: <img src="{{ player.avatar.url }}" style="max-height:200px;"> </li>
+    </li>
+
+</ul>
+{%endif%}
+
+</body>
+</html>

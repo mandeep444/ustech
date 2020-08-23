@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+        <td>Name</td>
+        <td>Counts</td>
+    </thead>
+    <tr>
+        <td><a href="{% url 'teams' %}">Teams</a></td>
+        <td>{{ teams_count }}</td>
+    </tr>
+     <tr>
+        <td><a href="{% url 'players' %}">Players</a></td>
+        <td>{{ players_count }}</td>
+    </tr>
+    <tr>
+        <td>Matches</td>
+        <td>{{ match_count }}</td>
+    </tr>
+</table>
+</body>
+</html>
